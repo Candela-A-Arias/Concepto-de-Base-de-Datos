@@ -6,7 +6,7 @@ Type
   End;
 
 Var 
-  fileVar: file Of Material;
+  MaterialesConstruccion: file Of Material;
   mat: Material;
 
 Procedure EscribirMateriales(filename: String);
@@ -24,27 +24,27 @@ Begin
 
   materiales[4].nombre := 'Vidrio';
 
-  Assign(fileVar, filename);
-  Rewrite(fileVar);
+  Assign(MaterialesConstruccion, filename);
+  Rewrite(MaterialesConstruccion);
 
   For i := 1 To 4 Do
-    Write(fileVar, materiales[i]);
+    Write(MaterialesConstruccion, materiales[i]);
 
-  Close(fileVar);
+  Close(MaterialesConstruccion);
   Writeln('Archivo binario ''', filename, ''' creado exitosamente.');
 End;
 
 Procedure LeerMateriales(filename: String);
 Begin
-  Assign(fileVar, filename);
-  Reset(fileVar);
+  Assign(MaterialesConstruccion, filename);
+  Reset(MaterialesConstruccion);
   Writeln('Materiales en el archivo:');
-  While Not EOF(fileVar) Do
+  While Not EOF(MaterialesConstruccion) Do
     Begin
-      Read(fileVar, mat);
+      Read(MaterialesConstruccion, mat);
       Writeln('Nombre: ', mat.nombre);
     End;
-  Close(fileVar);
+  Close(MaterialesConstruccion);
 End;
 
 Begin
