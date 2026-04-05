@@ -1,30 +1,19 @@
 
-Program MaterialesBinarios;
+Program stringesBinarios;
 
 Const 
-  F = 'fin'; {Constante para indicar el fin de la entrada de materiales}
+  F = 'fin'; {Constante para indicar el fin de la entrada de stringes}
 
 Type 
-  Material = Record
-    nombre: string;
-  End;
-  ArchivoMateriales = file Of Material;
-  {Tipo de archivo binario para almacenar materiales}
+   {Tipo de archivo binario para almacenar stringes}
   Nodo = Record
-    dato: Material;
+    dato: string;
     sig: ^Nodo;
   End;
-  List = ^Nodo; {Puntero para manejar una lista de materiales}
+  List = ^Nodo; {Puntero para manejar una lista de stringes}
+  Archivo = file Of string;
 
-Var 
-  Construccion: ArchivoMateriales;
-  {Variable para manejar el archivo binario de materiales}
-  mat: Material; {Variable para leer los materiales del archivo}
-  nombreArchivo: String; {Para llamar al archivo binario}
-  L : list; {Lista para almacenar los materiales ingresados por el usuario}
-
-
-Procedure agregarALista( Var L: List; mat: Material);
+Procedure agregarALista( Var L: List; mat: String);
 
 Var 
   aux: List;
@@ -35,45 +24,73 @@ Begin
   L := aux;
 End;
 
-Procedure IngresarMateriales(Var l: List);
+Procedure Ingresarstringes(Var l: List);
 
 Var 
-  materiales : Material;
+  materiales : string;
 Begin
-  writeln('Ingrese el nombbre del material, o fin para terminar');
-  readln(materiales.nombre);
+  writeln('Ingrese el nombbre del string, o fin para terminar');
+  readln(materiales);
   While materiales <> F Do
     Begin
-      agregarALista(l, Materiales);
-      readln(materiales.nombre);
+      agregarALista(l, materiales);
+      readln(materiales);
     End;
 End;
 
-Procedure GuardarMateriales(l: List; Var fileC: Construccion);
+Procedure Guardarstringes(l: List; Var fileC: Archivo);
 
 Var 
-  m : Material;
+  m : string;
 Begin
-  While (l <> null) do
+  While (l <> Nil) Do
     Begin
-      m.nombre := l^.dato.nombre;
+      m := l^.dato;
       write(fileC, m);
       l := l^.sig;
     End;
 End;
 
-Begin{Programa Principal}
-  L := Nil; {Inicializar la lista de materiales}
-  writeln("Ingrese el nombre del archivo binario para almacenar los materiales:"
+Procedure MostrarArchivos(nombreArchivo: String);
+
+Var 
+  fileC: Archivo;
+  m: string;
+Begin
+  assign(fileC, nombreArchivo);
+  reset(fileC);
+  writeln('Contenido del archivo ', nombreArchivo, ':');
+  While Not eof(fileC) Do
+    Begin
+      read(fileC, m);
+      writeln('Nombre del material: ', m);
+    End;
+  close(fileC);
+End;
+
+{Programa Principal}
+
+Var 
+  Construccion: Archivo;
+  {Variable para manejar el archivo binario de stringes}
+  nombreArchivo: String; {Para llamar al archivo binario}
+  L : list; {Lista para almacenar los stringes ingresados por el usuario}
+
+
+Begin
+  L := Nil; {Inicializar la lista de stringes}
+  writeln('Ingrese el nombre del archivo binario para almacenar los materiales:'
   );
   readln(nombreArchivo);
   assign(Construccion, nombreArchivo);
   rewrite(Construccion);
-  IngresarMateriales(L);
-{Llamar al procedimiento para ingresar materiales y almacenarlos en la lista}
-  GuardarMateriales(L, Construccion);
+  Ingresarstringes(L);
+  {Llamar al procedimiento para ingresar stringes y almacenarlos en la lista}
+  Guardarstringes(L, Construccion);
 
-{Llamar al procedimiento para guardar los materiales de la lista en el archivo binario}
+
+{Llamar al procedimiento para guardar los stringes de la lista en el archivo binario}
   close(Construccion);
+  MostrarArchivos(nombreArchivo);
   readln; {Esperar a que el usuario presione Enter antes de cerrar la consola}
 End.

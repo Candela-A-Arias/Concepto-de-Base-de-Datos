@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "fpc: Build Debug",
+            "type": "shell",
+            "command": "fpc",
+            "args": [
+                "${file}",
+                "-gw3", // Genera información de depuración para fpDebug
+                "-O-" // Desactiva optimizaciones para facilitar el debug
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

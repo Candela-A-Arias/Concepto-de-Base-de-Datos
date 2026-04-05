@@ -5,6 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Pascal: Depurar archivo actual",
+            "type": "fpDebug",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
+            "preLaunchTask": "fpc: Build Debug", // Asegúrate de que este nombre coincida con el 'label' en tu tasks.json
+        }
+    ] /*
+        {
             "type": "vms_dbg",
             "request": "launch",
             "name": "Settings Debug",
@@ -20,6 +28,5 @@
             "program": "",
             "arguments": "",
             "typeRun": "RUN"
-        }
-    ]
+        },/**/
 }
