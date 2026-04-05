@@ -1,42 +1,37 @@
-program MaterialesBinarios;
+
+Program MaterialesBinarios;
+
+Const 
+  F = 'fin'; {Constante para indicar el fin de la entrada de materiales}
 
 Type 
   Material = Record
     nombre: string;
   End;
-  ArchivoMateriales = file Of Material; {Tipo de archivo binario para almacenar materiales}
+  ArchivoMateriales = file Of Material;
+  {Tipo de archivo binario para almacenar materiales}
+  Nodo = Record
+    dato: Material;
+    sig: ^Nodo;
+  End;
+  List = ^Nodo; {Puntero para manejar una lista de materiales}
 
 Var 
-Construccion: ArchivoMateriales; {Variable para manejar el archivo binario de materiales}
-mat: Material; {Variable para leer los materiales del archivo}
-nombreArchivo: String; {Para llamar al archivo binario}
+  Construccion: ArchivoMateriales;
+  {Variable para manejar el archivo binario de materiales}
+  mat: Material; {Variable para leer los materiales del archivo}
+  nombreArchivo: String; {Para llamar al archivo binario}
 
 
-Procedure EscribirMateriales(filename: String);
+Procedure IngresarMateriales(Materiales: List);
+
 Var 
-  materiales: array[1..4] Of Material;
   i: integer;
 Begin
-  { Inicializar materiales de ejemplo }
-  materiales[1].nombre := 'Acero';
-
-  materiales[2].nombre := 'Cemento';
-
-  materiales[3].nombre := 'Madera';
-
-  materiales[4].nombre := 'Vidrio';
-
-  Assign(MaterialesConstruccion, filename);
-  Rewrite(MaterialesConstruccion);
-
-  For i := 1 To 4 Do
-    Write(MaterialesConstruccion, materiales[i]);
-
-  Close(MaterialesConstruccion);
-  Writeln('Archivo binario ''', filename, ''' creado exitosamente.');
+  writeln('Ingrese el nombbre del material, o fin para terminar');
 End;
 
-Procedure LeerMateriales(filename: String);
+Procedure GuardarMateriales(filename: String);
 Begin
   Assign(MaterialesConstruccion, filename);
   Reset(MaterialesConstruccion);
@@ -49,12 +44,15 @@ Begin
   Close(MaterialesConstruccion);
 End;
 
-Begin
-  writeln("Ingrese el nombre del archivo binario para almacenar los materiales:");
+Begin{Programa Principal}
+  List := Nil; {Inicializar la lista de materiales}
+  writeln("Ingrese el nombre del archivo binario para almacenar los materiales:"
+  );
   readln(nombreArchivo);
   assign(MaterialesConstruccion, nombreArchivo);
   rewrite(MaterialesConstruccion);
-  EscribirMateriales(nombreArchivo);
-  LeerMateriales(nombreArchivo);
+  IngresarMateriales(List);
+  GuardarMateriales(List,MaterialesConstruccion);
+  close(MaterialesConstruccion);
   readln; {Esperar a que el usuario presione Enter antes de cerrar la consola}
 End.
