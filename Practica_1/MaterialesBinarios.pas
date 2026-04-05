@@ -1,5 +1,5 @@
 
-Program stringesBinarios;
+Program stringesPractica1;
 
 Const 
   F = 'fin'; {Constante para indicar el fin de la entrada de stringes}
@@ -87,6 +87,8 @@ Begin
   Ingresarstringes(L);
   {Llamar al procedimiento para ingresar stringes y almacenarlos en la lista}
   Guardarstringes(L, Construccion);
+
+
 
 
 {Llamar al procedimiento para guardar los stringes de la lista en el archivo binario}
