@@ -21,38 +21,59 @@ Var
   {Variable para manejar el archivo binario de materiales}
   mat: Material; {Variable para leer los materiales del archivo}
   nombreArchivo: String; {Para llamar al archivo binario}
+  L : list; {Lista para almacenar los materiales ingresados por el usuario}
 
 
-Procedure IngresarMateriales(Materiales: List);
+Procedure agregarALista( Var L: List, mat: Material);
 
 Var 
-  i: integer;
+  aux: List;
 Begin
-  writeln('Ingrese el nombbre del material, o fin para terminar');
+  new(aux);
+  aux^.dato := mat;
+  aux^.sig := L;
+  L := aux;
 End;
 
-Procedure GuardarMateriales(filename: String);
+Procedure IngresarMateriales(Var l: List);
+
+Var 
+  materiales : Material;
 Begin
-  Assign(MaterialesConstruccion, filename);
-  Reset(MaterialesConstruccion);
-  Writeln('Materiales en el archivo:');
-  While Not EOF(MaterialesConstruccion) Do
+  writeln('Ingrese el nombbre del material, o fin para terminar');
+  readln(materiales.nombre);
+  While materiales <> F Do
     Begin
-      Read(MaterialesConstruccion, mat);
-      Writeln('Nombre: ', mat.nombre);
+      agregarALista(l, Materiales);
+      readln(materiales.nombre);
     End;
-  Close(MaterialesConstruccion);
+End;
+
+Procedure GuardarMateriales(l: List; Var fileC: Construccion);
+
+Var 
+  m : Material;
+Begin
+  While l != null Do
+    Begin
+      m.nombre := l^.dato.nombre;
+      write(fileC, m);
+      l := l^.sig;
+    End;
 End;
 
 Begin{Programa Principal}
-  List := Nil; {Inicializar la lista de materiales}
+  L := Nil; {Inicializar la lista de materiales}
   writeln("Ingrese el nombre del archivo binario para almacenar los materiales:"
   );
   readln(nombreArchivo);
-  assign(MaterialesConstruccion, nombreArchivo);
-  rewrite(MaterialesConstruccion);
-  IngresarMateriales(List);
-  GuardarMateriales(List,MaterialesConstruccion);
-  close(MaterialesConstruccion);
+  assign(Construccion, nombreArchivo);
+  rewrite(Construccion);
+  IngresarMateriales(L);
+{Llamar al procedimiento para ingresar materiales y almacenarlos en la lista}
+  GuardarMateriales(L, Construccion);
+
+{Llamar al procedimiento para guardar los materiales de la lista en el archivo binario}
+  close(Construccion);
   readln; {Esperar a que el usuario presione Enter antes de cerrar la consola}
 End.

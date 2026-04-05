@@ -1,3 +1,5 @@
 {
-    "vmssoftware.project-dep.buildName": "DEBUG"
+    "vmssoftware.project-dep.buildName": "DEBUG",
+    "pascal.formatter.engine": "ptop",
+    "pascal.formatter.enginePath": "C:\\lazarus\\fpc\\3.2.2\\bin\\x86_64-win64\\ptop.exe"
 }
