@@ -24,7 +24,7 @@ Var
   L : list; {Lista para almacenar los materiales ingresados por el usuario}
 
 
-Procedure agregarALista( Var L: List, mat: Material);
+Procedure agregarALista( Var L: List; mat: Material);
 
 Var 
   aux: List;
@@ -54,7 +54,7 @@ Procedure GuardarMateriales(l: List; Var fileC: Construccion);
 Var 
   m : Material;
 Begin
-  While l != null Do
+  While (l <> null) do
     Begin
       m.nombre := l^.dato.nombre;
       write(fileC, m);
