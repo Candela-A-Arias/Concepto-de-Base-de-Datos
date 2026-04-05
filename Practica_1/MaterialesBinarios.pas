@@ -4,10 +4,13 @@ Type
   Material = Record
     nombre: string;
   End;
+  ArchivoMateriales = file Of Material; {Tipo de archivo binario para almacenar materiales}
 
 Var 
-  MaterialesConstruccion: file Of Material;
-  mat: Material;
+Construccion: ArchivoMateriales; {Variable para manejar el archivo binario de materiales}
+mat: Material; {Variable para leer los materiales del archivo}
+nombreArchivo: String; {Para llamar al archivo binario}
+
 
 Procedure EscribirMateriales(filename: String);
 Var 
@@ -47,7 +50,11 @@ Begin
 End;
 
 Begin
-  EscribirMateriales('materiales.bin');
-  LeerMateriales('materiales.bin');
+  writeln("Ingrese el nombre del archivo binario para almacenar los materiales:");
+  readln(nombreArchivo);
+  assign(MaterialesConstruccion, nombreArchivo);
+  rewrite(MaterialesConstruccion);
+  EscribirMateriales(nombreArchivo);
+  LeerMateriales(nombreArchivo);
   readln; {Esperar a que el usuario presione Enter antes de cerrar la consola}
 End.
