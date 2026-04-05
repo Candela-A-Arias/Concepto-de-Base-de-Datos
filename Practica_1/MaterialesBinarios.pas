@@ -10,7 +10,6 @@ Var
   mat: Material;
 
 Procedure EscribirMateriales(filename: String);
-
 Var 
   materiales: array[1..4] Of Material;
   i: integer;
