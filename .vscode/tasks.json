@@ -7,12 +7,32 @@
             "command": "fpc",
             "args": [
                 "${file}",
-                "-gw3", // Genera información de depuración para fpDebug
-                "-O-" // Desactiva optimizaciones para facilitar el debug
+                "-gw3",
+                "-O-"
             ],
             "group": {
                 "kind": "build",
                 "isDefault": true
+            }
+        },
+        {
+            "label": "fpc: Build Ejercicio3",
+            "type": "shell",
+            "command": "fpc",
+            "args": [
+                "Ejercicio3.pas",
+                "-gw3",
+                "-O-"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/Practica_1"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "silent"
             }
         }
     ]

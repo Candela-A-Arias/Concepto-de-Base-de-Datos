@@ -5,11 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "fpDebug",
+            "request": "launch",
+            "name": "Pascal: Debug Ejercicio3",
+            "program": "${workspaceFolder}/Practica_1/Ejercicio3.exe",
+            "preLaunchTask": "fpc: Build Ejercicio3",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
             "name": "Pascal: Depurar archivo actual",
             "type": "fpDebug",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
-            "preLaunchTask": "fpc: Build Debug", // Asegúrate de que este nombre coincida con el 'label' en tu tasks.json
+            "preLaunchTask": "fpc: Build Debug"
         }
     ] /*
         {
