@@ -1,185 +1,59 @@
 
-Program Ejercicio6;
+Program Ejercicio7;
 
-Type 
-    Libro =   Record
-        ISBN:   int64;
-        titulo:   string;
-        genero:   string;
-        editorial:   string;
-        anio:   integer;
+Type
+    alumnos =   Record
+        dni:   integer;
+        legajo:   integer;
+        nombre:   string[20];
+        apellido:   string[20];
+        direccion:   string[50];
+        anioActual:   integer;
+        fechaNacimiento:   longInt;
     End;
-
-    CopiaLibrosBin =   File Of Libro;
-
-
-Procedure Leer(Var libro: Libro);
+Procedure agregarDatos(Var ArchivoLibros: text);
 Begin
-    writeln('Ingrese el ISBN del libro (13 digitos):');
-    read(libro.ISBN);
-    readln;
-    writeln('Ingrese el titulo del libro:');
-    readln(libro.titulo);
-    writeln('Ingrese el a¤o de publicaci¢n del libro:');
-    read(libro.anio);
-    readln;
-    writeln('Ingrese la editorial del libro:');
-    readln(libro.editorial);
-    writeln('Ingrese el g‚nero del libro:');
-    readln(libro.genero);
+    writeln(ArchivoLibros, 'DNI | Legajo | Nombre | Apellido | dirección | Año Actual de carrera | Fecha de nacimiento');
+            writeln('Agregar Alumno al archivo...');
+            writeln(ArchivoLibros, 1, ' | ', 1234, ' | ', 'Patroclo', ' | ', asd, ' | ', walle, ' | ', 2, ' | ', 78465321);
+            writeln(ArchivoLibros, 2, ' | ', 4583, ' | ', 'Paladín', ' | ', dsf, ' | ', poo, ' | ', 5, ' | ', 64535456);
+            writeln(ArchivoLibros, 3, ' | ', 8745, ' | ', 'Asesino', ' | ', gds, ' | ', zoo, ' | ', 2, ' | ', 4165432);
+            writeln(ArchivoLibros, 4, ' | ', 4535, ' | ', 'Rojo', ' | ', sdxf, ' | ', Moria, ' | ', 4, ' | ', 4865218);
+            writeln(ArchivoLibros, 5, ' | ', 4562, ' | ', 'Bardo', ' | ', sada, ' | ', loo, ' | ', 3, ' | ', 8475321);
+            writeln(ArchivoLibros, 6, ' | ', 5435, ' | ', 'Polaco', ' | ', dgffd, ' | ', aoo, ' | ', 2, ' | ', 8465321);
+            writeln(ArchivoLibros, 7, ' | ', 1566, ' | ', 'Monje', ' | ', dfsa, ' | ', see, ' | ', 5, ' | ', 7846531);
+            writeln(ArchivoLibros, 8, ' | ', 1235, ' | ', 'Escudero', ' | ', sfdfg, ' | ', leee, ' | ', 0, ' | ', 7864532);
+            writeln(ArchivoLibros, 9, ' | ', 8974, ' | ', 'Zamael', ' | ', dfdsgs, ' | ', meee, ' | ', 1, ' | ', 7864535);
+            writeln(ArchivoLibros, 10, ' | ', 6544, ' | ', 'Kel´thuzan', ' | ', sfds, ' | ', oppp, ' | ', 2, ' | ', 87645215);
+            writeln(ArchivoLibros, 11, ' | ', 5986, ' | ', 'Rogelio', ' | ', Negro, ' | ', koo, ' | ', 1, ' | ', 2154687);
 End;
+Procedure mostrarDatos(Var arch: text);
 
-
-Procedure Agregar(Var libro: Libro; Var ArchivoLibros: text);
+Var
+    alu:   alumnos;
+    basura:   string;
+    relleno:   char;
 Begin
-    writeln('Agregar libro al archivo...');
-    writeln(libro.ISBN, ' ', libro.titulo, ' ', libro.genero, ' ', libro.editorial, ' ', libro.anio);
-    writeln(ArchivoLibros, libro.ISBN, ' ', libro.titulo);
-    writeln(ArchivoLibros, libro.genero, ' ', libro.editorial);
-    writeln(ArchivoLibros, libro.anio);
-End;
-
-Procedure Mostrar(Var ArchivoLibros: text);
-
-Var 
-    li:   Libro;
-Begin
-    While Not eof(ArchivoLibros) Do
+    reset(arch);
+    readln(arch, basura, basura , basura, basura , basura, basura , basura, basura , basura, basura , basura, basura , basura);
+    While Not eof(arch) Do
         Begin
-            writeln('-----------------------------');
-
-            readln(ArchivoLibros, li.isbn, li.titulo);
-            writeln('ISBN: ', li.ISBN, ' | Titulo: ', li.titulo);
-            readln(ArchivoLibros, li.anio, li.editorial);
-            writeln('A¤o: ', li.anio, ' | Editorial: ', li.editorial);
-            readln(ArchivoLibros, li.genero);
-            writeln('Genero: ', li.genero);
+            readln(arch, alu.dni, relleno, alu.legajo, relleno , alu.nombre, relleno , alu.apellido, relleno , alu.direccion, relleno , alu.anioActual, relleno , alu.fechaNacimiento);
+            writeln('Imprime dni: ', alu.dni, 'legajo: ', alu.legajo);
+            //'Nombre del cargado: ', alu.nombre, ' Apellido: ', alu.apellido, ' con DNI: ', alu.dni, ' y legajo: ', alu.legajo, ' nacido el: ', alu.fechaNacimiento, ' y con direccion: ', alu.direccion, ' en el año: ', alu.anioActual,'.');
         End;
-    writeln('-----------------------------');
-End;
-
-Procedure Cargar(Var ArchivoLibros: text; Var ArchivoLibrosBin: CopiaLibrosBin);
-
-Var 
-    li:   Libro;
-Begin
-    While Not eof(ArchivoLibros) Do
-        Begin
-            readln(ArchivoLibros, li.isbn, li.titulo);
-            readln(ArchivoLibros, li.anio, li.editorial);
-            readln(ArchivoLibros, li.genero);
-            write(ArchivoLibrosBin, li);
-        End;
-End;
-
-Procedure imprimirBin(Var ArchivoLibrosBin: CopiaLibrosBin);
-
-Var 
-    li:   Libro;
-Begin
-    reset(ArchivoLibrosBin);
-    While Not eof(ArchivoLibrosBin) Do
-        Begin
-            read(ArchivoLibrosBin, li);
-            writeln('ISBN: ', li.ISBN, ' | Titulo: ', li.titulo);
-            writeln('A¤o: ', li.anio, ' | Editorial: ', li.editorial);
-            writeln('Genero: ', li.genero);
-            writeln('-----------------------------');
-        End;
-End;
-
-Procedure Carga(Var ArchivoLibrosBin: CopiaLibrosBin);
-
-Var 
-    li:   Libro;
-Begin
-    reset(ArchivoLibrosBin);
-    writeln('Ingrese los datos del libro a agregar:');
-    Leer(li);
-    Seek(ArchivoLibrosBin, FileSize(ArchivoLibrosBin));
-    write(ArchivoLibrosBin, li);
-    writeln('Libro agregado exitosamente.');
 
 End;
-
-Procedure Modificar(Var ArchivoLibrosBin: CopiaLibrosBin);
-
-Var 
-    li:   Libro;
-    ISBN:   int64;
+Var
+    arch:   ArchivoB;
+    archivo:   text;
+    nombreArchivo:   string;
 Begin
-    reset(ArchivoLibrosBin);
-    writeln('Ingrese el ISBN del libro a modificar:');
-    readln(ISBN);
+    assign(archivo, 'alumnos.txt');
+    rewrite(archivo);
+    agregarDatos(archivo);
+    close(archivo);
+    mostrarDatos(archivo);
+    close(archivo);
+end.
 
-    While (Not eof(ArchivoLibrosBin)) Do
-        Begin
-            read(ArchivoLibrosBin, li);
-            If (li.ISBN = ISBN) Then
-                Begin
-                    writeln('Ingrese los datos del libro a modificar');
-                    Leer(li);
-                    Seek(ArchivoLibrosBin, FilePos(ArchivoLibrosBin) - 1);
-                    write(ArchivoLibrosBin, li);
-                    writeln('Libro modificado exitosamente.');
-
-                    break;
-                End;
-        End;
-    If (eof(ArchivoLibrosBin)) Then
-        writeln('Libro no encontrado.');
-End;
-
-
-Var 
-    li:   Libro;
-    nombre:   string;
-    ArchivoLibros:   text;
-    ArchivoLibrosBin:   CopiaLibrosBin;
-    i :   integer;
-Begin
-    writeln('Ingrese el nombre del archivo:');
-    readln(nombre);
-    Assign(ArchivoLibros, nombre);
-   { rewrite(ArchivoLibros);
-    Leer(li);
-    Agregar(li, ArchivoLibros);
-writeln('Archivo creado exitosamente.');
-Mostrar(ArchivoLibros);
-
-close(ArchivoLibros);
-
-    }
-    reset(ArchivoLibros);
-
-    writeln('Ingrese el nombre del archivo binario:');
-    readln(nombre);
-    Assign(ArchivoLibrosBin, nombre);{
-    rewrite(ArchivoLibrosBin);
-    Cargar(ArchivoLibros, ArchivoLibrosBin);
-    writeln('Archivo binario creado exitosamente.');
-    imprimirBin(ArchivoLibrosBin);
-    close(ArchivoLibrosBin);}
-    imprimirBin(ArchivoLibrosBin);
-
-    writeln('Ingrese 1 para agregar un libro, 2 para modificar un libro:');
-    readln(i);
-    Case i Of 
-        1:
-             Begin
-                 writeln('Agregar Libro');
-                 Carga(ArchivoLibrosBin);
-                 imprimirBin(ArchivoLibrosBin);
-             End;
-        2:
-             Begin
-                 writeln('Modificar Libro');
-                 Modificar(ArchivoLibrosBin);
-                 imprimirBin(ArchivoLibrosBin);
-             End;
-        Else
-            writeln('Opci¢n no v lida');
-    End;
-    close(ArchivoLibros);
-    close(ArchivoLibrosBin);
-End.

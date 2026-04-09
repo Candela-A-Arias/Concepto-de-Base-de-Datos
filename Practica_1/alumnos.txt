@@ -1,0 +1,12 @@
+DNI | Legajo | Nombre | Apellido | direcci¢n | A¤o Actual de carrera | Fecha de nacimiento
+1 1234 Patroclo asd Walle 2 78465321
+2 4583 Palad¡n dsf poo 5 64535456
+3 8745 Asesino gds zoo 2 4165432
+4 4535 Rojo sdxf Moria 4 4865218
+5 4562 Bardo sada loo 3 8475321
+6 5435 Polaco dgffd aoo 2 8465321
+7 1566 Monje dfsa see 5 7846531
+8 1235 Escudero sfdfg leee 0 7864532
+9 8974 Zamael dfdsgs meee 1 7864535
+10 6544 Kel'thuzan sfds oppp 2 87645215
+11 5986 Rogelio Negro koo 1 2154687

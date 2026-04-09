@@ -1,0 +1,124 @@
+
+Program Ejercicio7;
+
+Type 
+    alumnos =   Record
+        dni:   integer;
+        legajo:   integer;
+        nombre:   string[20];
+        apellido:   string[20];
+        direccion:   string[50];
+        anioActual:   integer;
+        fechaNacimiento:   longInt;
+    End;
+
+    ArchivoB =   file Of alumnos;
+
+Procedure Leer(Var alu: alumnos);
+Begin
+    writeln('Ingrese el DNI del alumno:');
+    readln(alu.dni);
+    writeln('Ingrese el legajo del alumno:');
+    readln(alu.legajo);
+    writeln('Ingrese el nombre del alumno:');
+    readln(alu.nombre);
+    writeln('Ingrese el apellido del alumno:');
+    readln(alu.apellido);
+    writeln('Ingrese la direcci¢n del alumno:');
+    readln(alu.direccion);
+    writeln('Ingrese el a¤o actual:');
+    readln(alu.anioActual);
+    writeln('Ingrese la fecha de nacimiento del alumno:');
+    readln(alu.fechaNacimiento);
+End;
+
+
+Procedure agregarDatos(Var ArchivoLibros: text);
+
+Var 
+    i :   integer;
+    alu:   alumnos;
+Begin
+    i := 1;
+    writeln(ArchivoLibros, 'DNI | Legajo | Nombre | Apellido | direcci¢n | A¤o Actual de carrera | Fecha de nacimiento');
+    While i <= 11 Do
+        Begin
+            Leer(alu);
+            writeln('Agregar Alumno al archivo...');
+            writeln(ArchivoLibros, alu.dni, ' | ', alu.legajo, ' | ', alu.nombre, ' | ', alu.apellido, ' | ', alu.direccion, ' | ', alu.anioActual, ' | ', alu.fechaNacimiento);
+            i := i + 1;
+        End;
+End;
+
+
+
+Procedure cargardatos(Var archivo: text; Var arch: ArchivoB);
+
+Var 
+    alumno:   alumnos;
+    basura:   string;
+Begin
+    reset(archivo);
+    If Not eof(archivo) Then
+        writeln('Cargando datos del archivo de texto al archivo binario...');
+    readln(archivo, basura, basura , basura, basura , basura, basura , basura, basura , basura, basura , basura, basura , basura);
+    While Not eof(archivo) Do
+        Begin
+            read(archivo, alumno.dni);
+            read(archivo, alumno.legajo);
+            read(archivo, alumno.nombre);
+            read(archivo, alumno.apellido);
+            read(archivo, alumno.direccion);
+            read(archivo, alumno.anioActual);
+            readln(archivo, alumno.fechaNacimiento);
+            write(arch, alumno);
+            writeln('Nombre del cargado: ', alumno.nombre, ' Apellido: ', alumno.apellido, ' con DNI: ', alumno.dni, ' y legajo: ', alumno.legajo, ' nacido el: ', alumno.fechaNacimiento, ' y con direccion: ', alumno.direccion, ' en el a¤o: ', alumno.anioActual,'.');
+        End;
+End;
+
+Procedure mostrarDatos(Var arch: text);
+
+Var 
+    alu:   alumnos;
+    basura:   string;
+Begin
+    reset(arch);
+    readln(arch, basura);
+    writeln(basura);
+    While Not eof(arch) Do
+        Begin
+            read(arch, alu.dni);
+            read(arch, alu.legajo);
+            read(arch, alu.nombre);
+            read(arch, alu.apellido);
+            read(arch, alu.direccion);
+            read(arch, alu.anioActual);
+            readln(arch, alu.fechaNacimiento);
+            writeln(alu.dni, ' | ', alu.legajo, ' | ', alu.nombre, ' | ', alu.apellido, ' | ', alu.direccion, ' | ', alu.anioActual, ' | ', alu.fechaNacimiento, '/n');
+            writeln('Nombre alumno', alu.nombre, 'Apellido', alu.apellido);
+        End;
+
+End;
+
+Var 
+    arch:   ArchivoB;
+    archivo:   text;
+    nombreArchivo:   string;
+Begin
+    assign(archivo, 'alumnos.txt');{
+    rewrite(archivo);
+    agregarDatos(archivo);
+    close(archivo);}
+    mostrarDatos(archivo);{
+    writeln('Ingrese el nombre del archivo binario a crear:');
+    readln(nombreArchivo);
+    assign(arch, nombreArchivo);
+    rewrite(arch);
+    //Creaci¢n del archivo binario
+    //cargardatos(archivo, arch);
+    close(arch);
+
+
+}
+    close(archivo);
+End.
