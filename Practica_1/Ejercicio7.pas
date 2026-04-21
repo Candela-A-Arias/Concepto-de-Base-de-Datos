@@ -90,9 +90,9 @@ Begin
         Begin
             read(arch, alu.dni);
             readln(arch, alu.nombre);
-            read(arch, alu.legajo);{
+            read(arch, alu.legajo);
             read(arch, alu.apellido);
-            read(arch, alu.anioActual);
+            read(arch, alu.anioActual);{
             read(arch, alu.direccion);
             readln(arch, alu.fechaNacimiento);}
             writeln(alu.dni, ' | ', alu.nombre, ' | ', alu.legajo, ' | ', alu.apellido, ' | ', alu.anioActual, ' | ', alu.direccion, ' | ', alu.fechaNacimiento);
@@ -105,8 +105,11 @@ Var
     archivo:   text;
     nombreArchivo:   string;
 Begin
-    assign(archivo, 'alumnos.txt');{
-    rewrite(archivo);
+    assign(archivo, 'alumnos.txt');
+
+    reset(archivo);
+
+    {rewrite(archivo);
     agregarDatos(archivo);
     close(archivo);}
     mostrarDatos(archivo);{
