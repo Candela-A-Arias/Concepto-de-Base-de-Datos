@@ -8,7 +8,7 @@ Type
         //segundo orden
         localidad:   string;
         barrio:   string;
-        cantidad_ni¤os:   integer;
+        cantidad_ninos:   integer;
         cantidad_adultos_mayores:   integer;
     End;
 
