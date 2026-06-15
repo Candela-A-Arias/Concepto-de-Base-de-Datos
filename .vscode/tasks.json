@@ -7,7 +7,8 @@
             "command": "fpc",
             "args": [
                 "${file}",
-                "-gw3",
+                "-g",
+                "-gl",
                 "-O-"
             ],
             "group": {
@@ -20,13 +21,11 @@
             "type": "shell",
             "command": "fpc",
             "args": [
-                "Ejercicio3.pas",
-                "-gw3",
+                "${file}",
+                "-g",
+                "-gl",
                 "-O-"
             ],
-            "options": {
-                "cwd": "${workspaceFolder}/Practica_1"
-            },
             "group": {
                 "kind": "build",
                 "isDefault": true

@@ -57,7 +57,7 @@ End;
 
 // Crearemos un archivo maestro con los datos de los archivos detalle,
 // en la ruta que indique la variable nom
-Procedure CrearMaestro(Var m: P_actuales, String nom);
+Procedure CrearMaestro(Var m: P_actuales, nom: String);
 
 Var 
     m:   Maestro;

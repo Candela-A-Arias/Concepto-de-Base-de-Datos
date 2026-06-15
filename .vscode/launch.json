@@ -5,36 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Pascal: Debug archivo actual",
             "type": "fpDebug",
             "request": "launch",
-            "name": "Pascal: Debug Ejercicio3",
-            "program": "${workspaceFolder}/Practica_1/Ejercicio3.exe",
-            "preLaunchTask": "fpc: Build Ejercicio3",
-            "internalConsoleOptions": "neverOpen"
-        },
-        {
-            "name": "Pascal: Depurar archivo actual",
-            "type": "fpDebug",
-            "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
-            "preLaunchTask": "fpc: Build Debug"
+            "program": "${fileDirname}/${fileBasenameNoExtension}.pas",
+            "preLaunchTask": "fpc: Build Debug",
+            "stopOnEntry": true
         }
-    ] /*
-        {
-            "type": "vms_dbg",
-            "request": "launch",
-            "name": "Settings Debug",
-            "program": "",
-            "arguments": "",
-            "stopOnEntry": true,
-            "typeRun": "DEBUG"
-        },
-        {
-            "type": "vms_dbg",
-            "request": "launch",
-            "name": "Settings Run",
-            "program": "",
-            "arguments": "",
-            "typeRun": "RUN"
-        },/**/
+    ]
 }
